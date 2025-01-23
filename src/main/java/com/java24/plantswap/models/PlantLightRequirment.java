@@ -1,6 +1,6 @@
 package com.java24.plantswap.models;
 
-public enum LightRequirment {
+public enum PlantLightRequirment {
     LOW,
     MEDIUM,
     HIGH

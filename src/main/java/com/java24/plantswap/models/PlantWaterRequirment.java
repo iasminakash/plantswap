@@ -1,6 +1,6 @@
 package com.java24.plantswap.models;
 
-public enum CareDifficulty {
+public enum PlantWaterRequirment {
     LOW,
     MEDIUM,
     HIGH

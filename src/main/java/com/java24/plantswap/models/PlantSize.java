@@ -1,7 +1,7 @@
 package com.java24.plantswap.models;
 
-public enum WaterRequirment {
-    LOW,
+public enum PlantSize {
+    SMALL,
     MEDIUM,
-    HIGH
+    BIG
 }

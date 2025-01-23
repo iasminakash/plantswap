@@ -1,7 +1,13 @@
 package com.java24.plantswap.models;
 
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "plants")
 public class Plant {
 
+    @Id
     private String id;
 
     private String trivialName;
@@ -10,33 +16,136 @@ public class Plant {
 
     private int ageInMonths;
 
-    private Size size;
+    private PlantSize plantSize;
 
-    private Type type;
+    private PlantType plantType;
 
-    private LightRequirment lightRequirement;
+    private PlantLightRequirment lightRequirement;
 
-    private WaterRequirment waterRequirment;
+    private PlantWaterRequirment plantWaterRequirment;
 
-    private CareDifficulty careDifficulty;
+    private PlantCareDifficulty plantCareDifficulty;
 
-    private boolean isOnSale;
 
     private int priceInSEK;
-
-    private boolean isOnExchange;
 
     private String exchangePreferences;
 
     private String imageURL;
 
-    private Status status;
+    private PlantStatus plantStatus;
 
 
+    //tom konstruktor
+    public Plant() {
+    }
+
+    //getters och setter
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTrivialName() {
+        return trivialName;
+    }
+
+    public void setTrivialName(String trivialName) {
+        this.trivialName = trivialName;
+    }
+
+    public String getScientificName() {
+        return scientificName;
+    }
+
+    public void setScientificName(String scientificName) {
+        this.scientificName = scientificName;
+    }
+
+    public int getAgeInMonths() {
+        return ageInMonths;
+    }
+
+    public void setAgeInMonths(int ageInMonths) {
+        this.ageInMonths = ageInMonths;
+    }
+
+    public PlantSize getSize() {
+        return plantSize;
+    }
+
+    public void setSize(PlantSize plantSize) {
+        this.plantSize = plantSize;
+    }
+
+    public PlantType getType() {
+        return plantType;
+    }
+
+    public void setType(PlantType plantType) {
+        this.plantType = plantType;
+    }
+
+    public PlantLightRequirment getLightRequirement() {
+        return lightRequirement;
+    }
+
+    public void setLightRequirement(PlantLightRequirment lightRequirement) {
+        this.lightRequirement = lightRequirement;
+    }
+
+    public PlantWaterRequirment getWaterRequirment() {
+        return plantWaterRequirment;
+    }
+
+    public void setWaterRequirment(PlantWaterRequirment plantWaterRequirment) {
+        this.plantWaterRequirment = plantWaterRequirment;
+    }
+
+    public PlantCareDifficulty getCareDifficulty() {
+        return plantCareDifficulty;
+    }
+
+    public void setCareDifficulty(PlantCareDifficulty plantCareDifficulty) {
+        this.plantCareDifficulty = plantCareDifficulty;
+    }
+
+    public int getPriceInSEK() {
+        return priceInSEK;
+    }
+
+    public void setPriceInSEK(int priceInSEK) {
+        this.priceInSEK = priceInSEK;
+    }
 
 
+    public String getExchangePreferences() {
+        return exchangePreferences;
+    }
 
+    public void setExchangePreferences(String exchangePreferences) {
+        this.exchangePreferences = exchangePreferences;
+    }
 
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public PlantStatus getStatus() {
+        return plantStatus;
+    }
+
+    public void setStatus(PlantStatus plantStatus) {
+        this.plantStatus = plantStatus;
+    }
 
 
 
