@@ -82,11 +82,11 @@ public class Plant {
         this.plantSize = plantSize;
     }
 
-    public PlantType getType() {
+    public PlantType getPlantType() {
         return plantType;
     }
 
-    public void setType(PlantType plantType) {
+    public void setPlantType(PlantType plantType) {
         this.plantType = plantType;
     }
 
@@ -139,11 +139,11 @@ public class Plant {
         this.imageURL = imageURL;
     }
 
-    public PlantStatus getStatus() {
+    public PlantStatus getPlantStatus() {
         return plantStatus;
     }
 
-    public void setStatus(PlantStatus plantStatus) {
+    public void setPlantStatus(PlantStatus plantStatus) {
         this.plantStatus = plantStatus;
     }
 
