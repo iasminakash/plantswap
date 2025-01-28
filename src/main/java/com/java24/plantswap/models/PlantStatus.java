@@ -1,7 +1,7 @@
 package com.java24.plantswap.models;
 
 public enum PlantStatus {
-    AVALIABLE,
+    AVAILABLE,
     RESERVED,
     SOLD_OR_EXCHANGED
 }

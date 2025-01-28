@@ -1,6 +1,7 @@
 package com.java24.plantswap.service;
 
 import com.java24.plantswap.models.Plant;
+import com.java24.plantswap.models.PlantStatus;
 import com.java24.plantswap.repositories.PlantRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,10 @@ public class PlantService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found");
         }
         plantRepository.deleteById(id);
+    }
+
+    public List<Plant> getAvailablePlants() {
+        return plantRepository.findAllByPlantStatus(PlantStatus.AVAILABLE);
     }
 }
 

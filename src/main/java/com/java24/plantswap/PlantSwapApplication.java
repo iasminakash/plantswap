@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PlantswapApplication {
+public class PlantSwapApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PlantswapApplication.class, args);
+		SpringApplication.run(PlantSwapApplication.class, args);
 	}
 
 }

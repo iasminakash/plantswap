@@ -1,7 +1,6 @@
 package com.java24.plantswap.controllers;
 
 import com.java24.plantswap.models.Plant;
-import com.java24.plantswap.repositories.PlantRepository;
 import com.java24.plantswap.service.PlantService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +15,9 @@ import java.util.List;
 public class PlantController {
 
     private final PlantService plantService;
-    private final PlantRepository plantRepository;
 
-    public PlantController(PlantService plantService, PlantRepository plantRepository) {
+    public PlantController(PlantService plantService) {
         this.plantService = plantService;
-        this.plantRepository = plantRepository;
     }
 
     @PostMapping
@@ -52,6 +49,12 @@ public class PlantController {
     public ResponseEntity<Plant> deletePlant(@PathVariable String id) {
         plantService.deletePlant(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/available")
+    public ResponseEntity<List<Plant>> getAvailablePlants(){
+        List<Plant> availablePlants = plantService.getAvailablePlants();
+        return ResponseEntity.ok(availablePlants);
     }
 
 }
