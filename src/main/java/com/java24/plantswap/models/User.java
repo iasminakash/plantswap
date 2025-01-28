@@ -1,13 +1,16 @@
 package com.java24.plantswap.models;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 @Document(collection = "users")
 public class User {
 
+    @Id
     private String id;
 
     private String firstName;
@@ -18,9 +21,11 @@ public class User {
 
     private String password;
 
-    private ArrayList<Plant> plants;
+    @DBRef
+    private List<Plant> plants;
 
-    private ArrayList<Transaction> transactions;
+    @DBRef
+    private List<Transaction> transactions;
 
     //tomm konstruktor
     public User() {
@@ -59,11 +64,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public ArrayList<Plant> getPlants() {
+    public List<Plant> getPlants() {
         return plants;
     }
 
-    public void setPlants(ArrayList<Plant> plants) {
+    public void setPlants(List<Plant> plants) {
         this.plants = plants;
     }
 
@@ -75,11 +80,11 @@ public class User {
         this.password = password;
     }
 
-    public ArrayList<Transaction> getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(ArrayList<Transaction> transactions) {
+    public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
 }

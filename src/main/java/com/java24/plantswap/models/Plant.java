@@ -1,6 +1,10 @@
 package com.java24.plantswap.models;
 
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,6 +14,8 @@ public class Plant {
     @Id
     private String id;
 
+    @NotNull(message = "Plant name can not be null")
+    @NotEmpty(message = "Plant name can not be empty")
     private String trivialName;
 
     private String scientificName;
@@ -18,6 +24,8 @@ public class Plant {
 
     private PlantSize plantSize;
 
+    @NotNull(message = "Plant type can not be null")
+    @NotEmpty(message = "Plant type can not be null")
     private PlantType plantType;
 
     private PlantLightRequirment lightRequirement;
@@ -26,13 +34,18 @@ public class Plant {
 
     private PlantCareDifficulty plantCareDifficulty;
 
-
+    @Min(value = 50, message = "Plant price should not be less then 50 SEK")
+    @Max(value = 1000, message = "Plant price should not exceed 1000 SEK")
     private int priceInSEK;
 
     private String exchangePreferences;
 
+    @NotNull(message = "Plant image can not be null")
+    @NotEmpty(message = "Plant image can not be empty")
     private String imageURL;
 
+    @NotNull(message = "Plant status can not be null")
+    @NotEmpty(message = "Plant status can not be empty")
     private PlantStatus plantStatus;
 
 

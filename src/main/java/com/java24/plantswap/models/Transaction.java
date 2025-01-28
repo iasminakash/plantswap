@@ -1,5 +1,6 @@
 package com.java24.plantswap.models;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -9,10 +10,13 @@ public class Transaction {
 
     private String id;
 
-    private User seller;
+    @DBRef
+    private User owner;
 
-    private User buyer;
+    @DBRef
+    private User recipient;
 
+    @DBRef
     private Plant plant;
 
     private TransactionType transactionType;
@@ -31,22 +35,22 @@ public class Transaction {
     public void setId(String id) {
         this.id = id;
     }
-
-    public User getSeller() {
-        return seller;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setSeller(User seller) {
-        this.seller = seller;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
-    public User getBuyer() {
-        return buyer;
+    public User getRecipient() {
+        return recipient;
     }
 
-    public void setBuyer(User buyer) {
-        this.buyer = buyer;
+    public void setRecipient(User recipient) {
+        this.recipient = recipient;
     }
+
 
     public Plant getPlant() {
         return plant;
@@ -71,4 +75,5 @@ public class Transaction {
     public void setTransasctionDate(Date transasctionDate) {
         this.transasctionDate = transasctionDate;
     }
+
 }
