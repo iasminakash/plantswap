@@ -1,4 +1,4 @@
-package com.java24.plantswap.models;
+package com.java24.plantswap.models.plant;
 
 public enum PlantCareDifficulty {
     LEVEL_1_BEGINNER,

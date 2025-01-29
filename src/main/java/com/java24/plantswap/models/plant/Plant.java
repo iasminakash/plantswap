@@ -1,4 +1,4 @@
-package com.java24.plantswap.models;
+package com.java24.plantswap.models.plant;
 
 
 import jakarta.validation.constraints.Max;
@@ -19,6 +19,8 @@ public class Plant {
     private String trivialName;
 
     private String scientificName;
+
+    private DesiredTransactionType desiredTransactionType;
 
     private int ageInMonths;
 
@@ -160,30 +162,11 @@ public class Plant {
         this.plantStatus = plantStatus;
     }
 
+    public DesiredTransactionType getDesiredTransactionType() {
+        return desiredTransactionType;
+    }
 
-
-
-
-    /*Name (both scientific name and common/trivial name)
-Age/Size
-Plant Type (e.g., cutting, mature plant, seed, etc.)
-Light Requirements
-Water Requirements
-Difficulty Level of Care (1–5)
-Exchange Preferences or Fixed Price
-Images (URLs to pictures)
-Status (available, reserved, exchanged/sold)
-
-    Varje växt måste innehålla följande information:
-    Namn (både vetenskapligt namn och trivialnamn)
-    Ålder/storlek
-    Växttyp (stickling, fullvuxen planta, frö etc.)
-    Ljusbehov
-            Vattenbehov
-    Svårighetsgrad för skötsel (1-5)
-    Bytesönskemål eller fast pris
-    Bilder (URL:er till bilder)
-    Status (tillgänglig, reserverad, bytt/såld)
-    */
-
+    public void setDesiredTransactionType(DesiredTransactionType desiredTransactionType) {
+        this.desiredTransactionType = desiredTransactionType;
+    }
 }

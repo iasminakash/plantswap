@@ -1,7 +1,7 @@
 package com.java24.plantswap.service;
 
-import com.java24.plantswap.models.Plant;
-import com.java24.plantswap.models.PlantStatus;
+import com.java24.plantswap.models.plant.Plant;
+import com.java24.plantswap.models.plant.PlantStatus;
 import com.java24.plantswap.repositories.PlantRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class PlantService {
         Plant existingPlant = plantRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found"));
 
-        // Update the plant's attributes
+        // Updatera atributer hos Plant
         existingPlant.setTrivialName(plantDetails.getTrivialName());
         existingPlant.setScientificName(plantDetails.getScientificName());
         existingPlant.setAgeInMonths(plantDetails.getAgeInMonths());
@@ -48,11 +48,11 @@ public class PlantService {
         existingPlant.setImageURL(plantDetails.getImageURL());
         existingPlant.setPlantStatus(plantDetails.getPlantStatus());
 
-        // Save the updated plant
+        // Spara updaterade Plant
         return plantRepository.save(existingPlant);
     }
 
-    public void deletePlant(String id) {
+    public void deletePlantById(String id) {
         if (!plantRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found");
         }
@@ -62,5 +62,7 @@ public class PlantService {
     public List<Plant> getAvailablePlants() {
         return plantRepository.findAllByPlantStatus(PlantStatus.AVAILABLE);
     }
+
+
 }
 

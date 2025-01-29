@@ -1,5 +1,7 @@
-package com.java24.plantswap.models;
+package com.java24.plantswap.models.transaction;
 
+import com.java24.plantswap.models.plant.Plant;
+import com.java24.plantswap.models.user.User;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,7 +21,9 @@ public class Transaction {
     @DBRef
     private Plant plant;
 
-    private TransactionType transactionType;
+    private boolean ownerAgreement;
+
+    private boolean recipientAgreement;
 
     private Date transasctionDate;
 
@@ -35,6 +39,7 @@ public class Transaction {
     public void setId(String id) {
         this.id = id;
     }
+
     public User getOwner() {
         return owner;
     }
@@ -60,14 +65,6 @@ public class Transaction {
         this.plant = plant;
     }
 
-    public TransactionType getTransactionType() {
-        return transactionType;
-    }
-
-    public void setTransactionType(TransactionType transactionType) {
-        this.transactionType = transactionType;
-    }
-
     public Date getTransasctionDate() {
         return transasctionDate;
     }
@@ -76,4 +73,21 @@ public class Transaction {
         this.transasctionDate = transasctionDate;
     }
 
+    public boolean isOwnerAgreement() {
+        return ownerAgreement;
+    }
+
+    public void setOwnerAgreement(boolean ownerAgreement) {
+        this.ownerAgreement = ownerAgreement;
+    }
+
+    public boolean isRecipientAgreement() {
+        return recipientAgreement;
+    }
+
+    public void setRecipientAgreement(boolean recipientAgreement) {
+        this.recipientAgreement = recipientAgreement;
+    }
 }
+
+
