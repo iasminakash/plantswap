@@ -1,6 +1,7 @@
 package com.java24.plantswap.models.user;
 
 import com.java24.plantswap.models.plant.Plant;
+import com.java24.plantswap.models.transaction.Transaction;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
@@ -36,7 +37,7 @@ public class User {
     private List<Plant> plants;
 
     @DBRef
-    private List<Plant> transactions;
+    private List<Transaction> transactions;
 
     //tomm konstruktor
     public User() {
@@ -91,11 +92,11 @@ public class User {
         this.plants = plants;
     }
 
-    public List<Plant> getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(List<Plant> transactions) {
+    public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
 }

@@ -30,7 +30,7 @@ public class Plant {
     @NotEmpty(message = "Plant type can not be null")
     private PlantType plantType;
 
-    private PlantLightRequirment lightRequirement;
+    private PlantLightRequirment plantLightRequirment;
 
     private PlantWaterRequirment plantWaterRequirment;
 
@@ -49,6 +49,7 @@ public class Plant {
     @NotNull(message = "Plant status can not be null")
     @NotEmpty(message = "Plant status can not be empty")
     private PlantStatus plantStatus;
+
 
 
     //tom konstruktor
@@ -106,11 +107,11 @@ public class Plant {
     }
 
     public PlantLightRequirment getLightRequirement() {
-        return lightRequirement;
+        return plantLightRequirment;
     }
 
     public void setLightRequirement(PlantLightRequirment lightRequirement) {
-        this.lightRequirement = lightRequirement;
+        this.plantLightRequirment = lightRequirement;
     }
 
     public PlantWaterRequirment getWaterRequirment() {
@@ -168,5 +169,29 @@ public class Plant {
 
     public void setDesiredTransactionType(DesiredTransactionType desiredTransactionType) {
         this.desiredTransactionType = desiredTransactionType;
+    }
+
+    public PlantSize getPlantSize() {
+        return plantSize;
+    }
+
+    public void setPlantSize(PlantSize plantSize) {
+        this.plantSize = plantSize;
+    }
+
+    public PlantWaterRequirment getPlantWaterRequirment() {
+        return plantWaterRequirment;
+    }
+
+    public void setPlantWaterRequirment(PlantWaterRequirment plantWaterRequirment) {
+        this.plantWaterRequirment = plantWaterRequirment;
+    }
+
+    public PlantCareDifficulty getPlantCareDifficulty() {
+        return plantCareDifficulty;
+    }
+
+    public void setPlantCareDifficulty(PlantCareDifficulty plantCareDifficulty) {
+        this.plantCareDifficulty = plantCareDifficulty;
     }
 }

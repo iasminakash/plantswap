@@ -1,8 +1,7 @@
 package com.java24.plantswap.models.transaction;
 
-import com.java24.plantswap.models.plant.Plant;
-import com.java24.plantswap.models.user.User;
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -12,14 +11,17 @@ public class Transaction {
 
     private String id;
 
-    @DBRef
-    private User owner;
+    @NotNull(message = "PlantId can not be null")
+    @NotEmpty(message = "PlantId can not be empty")
+    private String plantId;
 
-    @DBRef
-    private User recipient;
+    @NotNull(message = "RecipientId can not be null")
+    @NotEmpty(message = "RecipientId can not be empty")
+    private String recipientId;
 
-    @DBRef
-    private Plant plant;
+    @NotNull(message = "OwnerId can not be null")
+    @NotEmpty(message = "OwnerId can not be empty")
+    private String ownerId;
 
     private boolean ownerAgreement;
 
@@ -38,31 +40,6 @@ public class Transaction {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    public User getRecipient() {
-        return recipient;
-    }
-
-    public void setRecipient(User recipient) {
-        this.recipient = recipient;
-    }
-
-
-    public Plant getPlant() {
-        return plant;
-    }
-
-    public void setPlant(Plant plant) {
-        this.plant = plant;
     }
 
     public Date getTransasctionDate() {
@@ -87,6 +64,30 @@ public class Transaction {
 
     public void setRecipientAgreement(boolean recipientAgreement) {
         this.recipientAgreement = recipientAgreement;
+    }
+
+    public String getPlantId() {
+        return plantId;
+    }
+
+    public void setPlantId(String plantId) {
+        this.plantId = plantId;
+    }
+
+    public String getRecipientId() {
+        return recipientId;
+    }
+
+    public void setRecipientId(String recipientId) {
+        this.recipientId = recipientId;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 }
 

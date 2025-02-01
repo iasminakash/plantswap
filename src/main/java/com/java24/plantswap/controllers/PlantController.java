@@ -21,9 +21,9 @@ public class PlantController {
     }
 
 
-    @PostMapping
-    public ResponseEntity<Plant> createPlant (@RequestBody Plant plant) {
-        Plant savedPlant = plantService.createPlant(plant);
+    @PostMapping("/{userId}")
+    public ResponseEntity<Plant> createPlant (@RequestBody Plant plant, @PathVariable String userId) {
+        Plant savedPlant = plantService.createPlant(plant, userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedPlant);
     }
 
@@ -52,12 +52,11 @@ public class PlantController {
         return ResponseEntity.noContent().build();
     }
 
+
     @GetMapping("/available")
-    public ResponseEntity<List<Plant>> getAvailablePlants(){
-        List<Plant> availablePlants = plantService.getAvailablePlants();
-        return ResponseEntity.ok(availablePlants);
+    public ResponseEntity<List<Plant>> getAllAvailablePlants() {
+        List <Plant> plants = plantService.getAvailablePlants();
+        return ResponseEntity.ok(plants);
     }
-
-
 
 }
