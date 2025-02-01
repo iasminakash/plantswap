@@ -40,7 +40,7 @@ public class PlantController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Plant> updatePlant(@PathVariable String id, @RequestBody Plant plantDetails) {
+    public ResponseEntity<Plant> updatePlantById(@PathVariable String id, @RequestBody Plant plantDetails) {
         Plant updatedPlant = plantService.updatePlantById(id, plantDetails);
         return ResponseEntity.ok(updatedPlant);
     }

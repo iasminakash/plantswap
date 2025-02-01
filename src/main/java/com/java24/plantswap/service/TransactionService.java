@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class TransactionService {
@@ -48,11 +49,11 @@ public class TransactionService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "These plant is only available for swap.");
         }
         //Om det är såld eller utbytt kastar felmedelande
-        if(plant.getPlantStatus().equals(PlantStatus.SOLD_OR_EXCHANGED)){
+        if(plant.getPlantStatus().equals(PlantStatus.SOLD_OR_SWAPPED)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The flower is already sold or swapped.");
         }
-        //om de två "if" skippades och så byter jag status på plantan och gör det från "AVAILABLE" till SOLD_OR_EXCHANGED
-        plant.setPlantStatus(PlantStatus.SOLD_OR_EXCHANGED);
+        //om de två "if" skippades och så byter jag status på plantan och gör det från "AVAILABLE" till SOLD_OR_SWAPPED
+        plant.setPlantStatus(PlantStatus.SOLD_OR_SWAPPED);
         //sparar planta
         plantRepository.save(plant);
         //sätter datum för transactionen
@@ -97,14 +98,14 @@ public class TransactionService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "These plant is only available for sale.");
         }
         //Om det är såld eller utbytt kastar felmedelande
-        if(plant.getPlantStatus().equals(PlantStatus.SOLD_OR_EXCHANGED)){
+        if(plant.getPlantStatus().equals(PlantStatus.SOLD_OR_SWAPPED)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The flower is already sold or swapped.");
         }
         //om de två "if" skippades och så byter jag status på plantan och gör det från "AVAILABLE" till "RESERVED"
         plant.setPlantStatus(PlantStatus.RESERVED);
         //sparar planta
         plantRepository.save(plant);
-        //sätter datum för transactionen
+        //ställer om datum
         newTransaction.setTransasctionDate(new Date());
         //recipient BOOLEAN om agreement sätts till TRUE, ownerAgreement är forfarande FALSE
         newTransaction.setOwnerAgreement(false);
@@ -132,8 +133,52 @@ public class TransactionService {
     }
 
     //Metod för att accepterade en request
+    public Transaction acceptSwapRequestApproval(Transaction newTransaction){
+        //hittar plantan, med hjälp av id, använder metoden getPlantById från plantService samt getter
+        Plant plant = plantService.getPlantById(newTransaction.getPlantId());
+        //hittar owner och recipient med hjälp av id, använder metoden getUserById från userService
+        User owner = userService.getUserById(newTransaction.getOwnerId());
+        User recipient = userService.getUserById(newTransaction.getRecipientId());
+        //Nu när jag hittat allt, ska ownerAgreement approval sättas till TRUE
+        newTransaction.setOwnerAgreement(true);
+        //Status ska ändras från "RESERVED" till "SOLD_OR_SWAPPED"
+        plant.setPlantStatus(PlantStatus.SOLD_OR_SWAPPED);
+        //datum ska också updateras och ställas om
+        newTransaction.setTransasctionDate(new Date());
+        //Updaterar planta
+        plantService.updatePlantById(plant.getId(), plant);
+        //Updaterar users
+        userService.updateUserById(owner.getId(), owner);
+        userService.updateUserById(recipient.getId(), recipient);
+        //Updaterar transaction
+        return updateTransactionById(newTransaction.getId(), newTransaction);
+
+    }
 
 
+    //metod för att hämta alla transaktioner
+    public List<Transaction> getAllTransactions(){
+        return transactionRepository.findAll();
+    }
 
+    //metod för att hämta en transaktion efter id, kastar fel om inte hittar transactionen i repositoriet
+    public Transaction getTransactionById(String transactionId){
+        return transactionRepository.findById(transactionId)
+                .orElseThrow(() -> new RuntimeException("Transaction not found with id: " + transactionId));
+    }
 
+    //metod för att updatera en transaction
+    public Transaction updateTransactionById(String transactionId, Transaction newTransaction){
+        //hittar transaction efter id med metoden getTransactionById
+        Transaction existingTransaction = getTransactionById(transactionId);
+        //uppdaterar alla attributes
+        existingTransaction.setPlantId(newTransaction.getPlantId());
+        existingTransaction.setRecipientId(newTransaction.getRecipientId());
+        existingTransaction.setOwnerId(newTransaction.getOwnerId());
+        existingTransaction.setOwnerAgreement(newTransaction.isOwnerAgreement());
+        existingTransaction.setRecipientAgreement(newTransaction.isRecipientAgreement());
+        existingTransaction.setTransasctionDate(newTransaction.getTransasctionDate());
+        //sparade uppdatedade transactionen till transaction repository
+        return transactionRepository.save(existingTransaction);
+    }
 }

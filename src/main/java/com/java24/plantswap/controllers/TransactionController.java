@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 //talar om att det är kontroller
 @RestController
@@ -32,4 +34,27 @@ public class TransactionController {
         return ResponseEntity.ok(swapRequest);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Transaction>> getAllTransactions(){
+        List <Transaction> transactions = transactionService.getAllTransactions();
+        return ResponseEntity.ok(transactions);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Transaction> getTransactionById (@Valid @PathVariable String id) {
+        Transaction transaction = transactionService.getTransactionById(id);
+        return ResponseEntity.ok(transaction);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Transaction> updateTransactionById (@Valid @PathVariable String id, @RequestBody Transaction newTransaction){
+        Transaction transaction = transactionService.updateTransactionById(id, newTransaction);
+        return ResponseEntity.ok(transaction);
+    }
+
+    @PutMapping("/swapapproval")
+    public ResponseEntity<Transaction> approveTransaction (@Valid @RequestBody Transaction transaction){
+        Transaction swapRequestApproval = transactionService.acceptSwapRequestApproval(transaction);
+        return  ResponseEntity.ok(transaction);
+    }
 }
