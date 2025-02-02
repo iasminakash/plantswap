@@ -22,7 +22,7 @@ public class Plant {
 
     private DesiredTransactionType desiredTransactionType;
 
-    private int ageInMonths;
+    private Integer ageInMonths;
 
     private PlantSize plantSize;
 
@@ -38,7 +38,7 @@ public class Plant {
 
     @Min(value = 50, message = "Plant price should not be less then 50 SEK")
     @Max(value = 1000, message = "Plant price should not exceed 1000 SEK")
-    private int priceInSEK;
+    private Integer priceInSEK;
 
     private String exchangePreferences;
 
@@ -49,7 +49,6 @@ public class Plant {
     @NotNull(message = "Plant status can not be null")
     @NotEmpty(message = "Plant status can not be empty")
     private PlantStatus plantStatus;
-
 
 
     //tom konstruktor
@@ -82,7 +81,7 @@ public class Plant {
         this.scientificName = scientificName;
     }
 
-    public int getAgeInMonths() {
+    public Integer getAgeInMonths() {
         return ageInMonths;
     }
 
@@ -130,11 +129,11 @@ public class Plant {
         this.plantCareDifficulty = plantCareDifficulty;
     }
 
-    public int getPriceInSEK() {
+    public Integer getPriceInSEK() {
         return priceInSEK;
     }
 
-    public void setPriceInSEK(int priceInSEK) {
+    public void setPriceInSEK(Integer priceInSEK) {
         this.priceInSEK = priceInSEK;
     }
 
@@ -171,27 +170,5 @@ public class Plant {
         this.desiredTransactionType = desiredTransactionType;
     }
 
-    public PlantSize getPlantSize() {
-        return plantSize;
-    }
 
-    public void setPlantSize(PlantSize plantSize) {
-        this.plantSize = plantSize;
-    }
-
-    public PlantWaterRequirment getPlantWaterRequirment() {
-        return plantWaterRequirment;
-    }
-
-    public void setPlantWaterRequirment(PlantWaterRequirment plantWaterRequirment) {
-        this.plantWaterRequirment = plantWaterRequirment;
-    }
-
-    public PlantCareDifficulty getPlantCareDifficulty() {
-        return plantCareDifficulty;
-    }
-
-    public void setPlantCareDifficulty(PlantCareDifficulty plantCareDifficulty) {
-        this.plantCareDifficulty = plantCareDifficulty;
-    }
 }

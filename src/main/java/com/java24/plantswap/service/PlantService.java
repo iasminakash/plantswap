@@ -4,6 +4,7 @@ import com.java24.plantswap.models.plant.Plant;
 import com.java24.plantswap.models.plant.PlantStatus;
 import com.java24.plantswap.models.user.User;
 import com.java24.plantswap.repositories.PlantRepository;
+import com.java24.plantswap.repositories.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,10 +17,12 @@ public class PlantService {
     //konstruktor injektion istället för autowired
     private final PlantRepository plantRepository;
     private final UserService userService;
+    private final UserRepository userRepository;
 
-    public PlantService(PlantRepository plantRepository, UserService userService) {
+    public PlantService(PlantRepository plantRepository, UserService userService, UserRepository userRepository) {
         this.plantRepository = plantRepository;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
     //metod för att skapa ny planta och binda den till user
     public Plant createPlant(Plant plant, String userId) {
@@ -62,26 +65,56 @@ public class PlantService {
         Plant existingPlant = getPlantById(plantId);
 
         // Updatera atributer hos Plant
-        existingPlant.setTrivialName(plantDetails.getTrivialName());
-        existingPlant.setScientificName(plantDetails.getScientificName());
-        existingPlant.setAgeInMonths(plantDetails.getAgeInMonths());
-        existingPlant.setPlantType(plantDetails.getPlantType());
-        existingPlant.setLightRequirement(plantDetails.getLightRequirement());
-        existingPlant.setWaterRequirment(plantDetails.getWaterRequirment());
-        existingPlant.setCareDifficulty(plantDetails.getCareDifficulty());
-        existingPlant.setPriceInSEK(plantDetails.getPriceInSEK());
-        existingPlant.setExchangePreferences(plantDetails.getExchangePreferences());
-        existingPlant.setImageURL(plantDetails.getImageURL());
-        existingPlant.setPlantStatus(plantDetails.getPlantStatus());
-
+        if(plantDetails.getTrivialName() != null){
+            existingPlant.setTrivialName(plantDetails.getTrivialName());
+        }
+        if(plantDetails.getScientificName() != null){
+            existingPlant.setScientificName(plantDetails.getScientificName());
+        }
+        if(plantDetails.getAgeInMonths() != null){
+            existingPlant.setAgeInMonths(plantDetails.getAgeInMonths());
+        }
+        if(plantDetails.getPlantType() != null){
+            existingPlant.setPlantType(plantDetails.getPlantType());
+        }
+        if(plantDetails.getLightRequirement() != null){
+            existingPlant.setLightRequirement(plantDetails.getLightRequirement());
+        }
+        if(plantDetails.getWaterRequirment() != null){
+            existingPlant.setWaterRequirment(plantDetails.getWaterRequirment());
+        }
+        if(plantDetails.getCareDifficulty() != null){
+            existingPlant.setCareDifficulty(plantDetails.getCareDifficulty());
+        }
+        if(plantDetails.getPriceInSEK() != null){
+            existingPlant.setPriceInSEK(plantDetails.getPriceInSEK());
+        }
+        if(plantDetails.getExchangePreferences() != null){
+            existingPlant.setExchangePreferences(plantDetails.getExchangePreferences());
+        }
+        if(plantDetails.getImageURL() != null){
+            existingPlant.setImageURL(plantDetails.getImageURL());
+        }
+        if(plantDetails.getPlantStatus() != null) {
+            existingPlant.setPlantStatus(plantDetails.getPlantStatus());
+        }
+        if(plantDetails.getDesiredTransactionType() != null) {
+            existingPlant.setDesiredTransactionType(plantDetails.getDesiredTransactionType());
+        }
+        if(plantDetails.getSize() != null){
+            existingPlant.setSize(plantDetails.getSize());
+        }
         // Spara updaterade plantan
         return plantRepository.save(existingPlant);
     }
 
     //metod för att få bort en planta efter id, kastar fel ifall det inte finns en planta med det id
-    public void deletePlantById(String plantId) {
+    public void deletePlantById(String plantId, String userId) {
         Plant plant = getPlantById(plantId);
         plantRepository.deleteById(plantId);
+        User user = userService.getUserById(userId);
+        user.getPlants().remove(plant);
+        userRepository.save(user);
     }
 
     //metod som hämtar alla tillgälgiga plantor

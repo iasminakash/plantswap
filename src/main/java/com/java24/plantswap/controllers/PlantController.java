@@ -46,9 +46,9 @@ public class PlantController {
     }
 
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Plant> deletePlant(@PathVariable String id) {
-        plantService.deletePlantById(id);
+    @DeleteMapping("/{plantId}/{userId}")
+    public ResponseEntity<Plant> deletePlant(@PathVariable String plantId, @PathVariable String userId) {
+        plantService.deletePlantById(plantId, userId);
         return ResponseEntity.noContent().build();
     }
 

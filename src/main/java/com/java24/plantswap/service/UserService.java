@@ -39,18 +39,25 @@ public class UserService {
         //hämtar user efter id med hjälp av metoden getUserById
         User existingUser = getUserById(userId);
         //updaterar attributer hos User
-        existingUser.setFirstName(userDetails.getFirstName());
-        existingUser.setLastName(userDetails.getLastName());
-        existingUser.setEmail(userDetails.getEmail());
-        existingUser.setPassword(userDetails.getPassword());
-        //ser till att nya user array med plants och transactions är inte null, utan det skrivs de över och de gamla plants och transactions försinner
+        //ser till att nya user attributer är inte null, utan det skrivs de över och de gamla attributer försinner
+        if(userDetails.getFirstName() == null){
+            existingUser.setFirstName(userDetails.getFirstName());
+        }
+        if(userDetails.getLastName() == null){
+            existingUser.setLastName(userDetails.getLastName());
+        }
+        if(userDetails.getEmail() == null){
+            existingUser.setEmail(userDetails.getEmail());
+        }
+        if(existingUser.getPassword() == null){
+            existingUser.setPassword(userDetails.getPassword());
+        }
         if(userDetails.getPlants() != null){
             existingUser.setPlants(userDetails.getPlants());
         }
         if(userDetails.getTransactions() != null){
             existingUser.setTransactions(userDetails.getTransactions());
         }
-
         //spara updaterade User
         return userRepository.save(existingUser);
     }
@@ -64,7 +71,7 @@ public class UserService {
     public List<Plant> getAllPlantsOfUser(String userId){
         //hämtar user efter id med hjälp av metoden getUserById
         User existingUser = getUserById(userId);
-        return getUserById(userId).getPlants();
+        return existingUser.getPlants();
     }
 
 }
