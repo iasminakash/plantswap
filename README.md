@@ -113,14 +113,7 @@ Vid byte måste båda parter godkänna bytet innan det genomförs.
 Prissatta växter måste ha ett fast pris mellan 50 och 1000 kr.
 
 # Lista över kända begränsningar
-Problem: Systemet tillåter att en användare kan skapas med samma ID, vilket kan orsaka referensfel.
-Förslag på förbättring: Validering av ID. Se till att en användare inte kan läggas till om den har samma ID. En ännu bättre lösning är att använda datatypen UUID som ID i kollektionen "users" för att säkerställa att det genereras ett unikt ID för varje ny användare.
-#
-Problem: Systemet tillåter att en planta kan skapas med samma ID, vilket kan orsaka referensfel.
-Förslag på förbättring: Validering av ID. Se till att en planta inte kan listas med samma ID. En ännu bättre lösning är att använda datatypen UUID som ID i kollektionen "plants" för att säkerställa att det genereras ett unikt ID för varje ny planta.
-#
 Problem: Systemet tillåter att en användare byter planta med sig själv eller köper en planta från sig själv, vilket inte är logiskt.
 Förslag på förbättring: Ha bättre kontroll och med hjälp av förändring i bussines logiken se till att ownerId och recipientId i kollektionen "transactions" inte kan vara samma värde.
-
 
 
