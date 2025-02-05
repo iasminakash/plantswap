@@ -40,16 +40,16 @@ public class UserService {
         User existingUser = getUserById(userId);
         //updaterar attributer hos User
         //ser till att nya user attributer är inte null, utan det skrivs de över och de gamla attributer försinner
-        if(userDetails.getFirstName() == null){
+        if(userDetails.getFirstName() != null){
             existingUser.setFirstName(userDetails.getFirstName());
         }
-        if(userDetails.getLastName() == null){
+        if(userDetails.getLastName() != null){
             existingUser.setLastName(userDetails.getLastName());
         }
-        if(userDetails.getEmail() == null){
+        if(userDetails.getEmail() != null){
             existingUser.setEmail(userDetails.getEmail());
         }
-        if(existingUser.getPassword() == null){
+        if(existingUser.getPassword() != null){
             existingUser.setPassword(userDetails.getPassword());
         }
         if(userDetails.getPlants() != null){

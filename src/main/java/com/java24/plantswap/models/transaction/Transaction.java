@@ -13,7 +13,9 @@ public class Transaction {
 
     @NotNull(message = "PlantId can not be null")
     @NotEmpty(message = "PlantId can not be empty")
-    private String plantId;
+    private String ownerPlantId;
+
+    private String recipientPlantId;
 
     @NotNull(message = "RecipientId can not be null")
     @NotEmpty(message = "RecipientId can not be empty")
@@ -66,12 +68,20 @@ public class Transaction {
         this.recipientAgreement = recipientAgreement;
     }
 
-    public String getPlantId() {
-        return plantId;
+    public String getOwnerPlantId() {
+        return ownerPlantId;
     }
 
-    public void setPlantId(String plantId) {
-        this.plantId = plantId;
+    public void setOwnerPlantId(String ownerPlantId) {
+        this.ownerPlantId = ownerPlantId;
+    }
+
+    public String getRecipientPlantId() {
+        return recipientPlantId;
+    }
+
+    public void setRecipientPlantId(String recipientPlantId) {
+        this.recipientPlantId = recipientPlantId;
     }
 
     public String getRecipientId() {

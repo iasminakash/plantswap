@@ -28,7 +28,7 @@ public class PlantService {
     public Plant createPlant(Plant plant, String userId) {
         //Hittar usern på user id genom att kalla metoden getUserById från userService
         User user = userService.getUserById(userId);
-        //Om usern har fler än 10 plantor ska inte tillåta skapa ny listing med planta och ska sckika en felmedelande
+        //Om usern har fler än 10 plantor ska inte tillåta skapa ny listing med planta och ska skicka en felmedelande
         if(user.getPlants() != null && user.getPlants().size() >= 10){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You exceeded maximum number of posted plants.");
         }
@@ -131,7 +131,6 @@ public class PlantService {
         }
         return availablePlants;
     }
-
 
 }
 

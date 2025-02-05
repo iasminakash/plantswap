@@ -2,6 +2,7 @@ package com.java24.plantswap.controllers;
 
 import com.java24.plantswap.models.plant.Plant;
 import com.java24.plantswap.service.PlantService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class PlantController {
 
 
     @PostMapping("/{userId}")
-    public ResponseEntity<Plant> createPlant (@RequestBody Plant plant, @PathVariable String userId) {
+    public ResponseEntity<Plant> createPlant (@RequestBody Plant plant, @Valid @PathVariable String userId) {
         Plant savedPlant = plantService.createPlant(plant, userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedPlant);
     }
@@ -40,7 +41,7 @@ public class PlantController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Plant> updatePlantById(@PathVariable String id, @RequestBody Plant plantDetails) {
+    public ResponseEntity<Plant> updatePlantById(@PathVariable String id, @Valid @RequestBody Plant plantDetails) {
         Plant updatedPlant = plantService.updatePlantById(id, plantDetails);
         return ResponseEntity.ok(updatedPlant);
     }

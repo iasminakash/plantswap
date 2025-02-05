@@ -2,6 +2,6 @@ package com.java24.plantswap.models.plant;
 
 public enum PlantType {
     SEED,
-    CUTTLING,
+    CUTTING,
     MATURE_PLANT
 }

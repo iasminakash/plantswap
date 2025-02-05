@@ -3,6 +3,7 @@ package com.java24.plantswap.controllers;
 import com.java24.plantswap.models.plant.Plant;
 import com.java24.plantswap.models.user.User;
 import com.java24.plantswap.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUserById(@PathVariable String id, @RequestBody User userDetails){
+    public ResponseEntity<User> updateUserById(@PathVariable String id, @Valid @RequestBody User userDetails){
         User updatedUser = userService.updateUserById(id, userDetails);
         return ResponseEntity.ok(updatedUser);
     }
@@ -57,15 +58,6 @@ public class UserController {
         List<Plant> plants = userService.getAllPlantsOfUser(id);
         return ResponseEntity.ok(plants);
     }
-
-
-
-
-
-
-
-
-
 
 
 }

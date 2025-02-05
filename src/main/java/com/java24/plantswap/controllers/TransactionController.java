@@ -61,7 +61,7 @@ public class TransactionController {
 
     @GetMapping("/swapapproval/{transactionId}")
     public ResponseEntity<Transaction> approveTransaction (@PathVariable String transactionId){
-        Transaction swapRequestApproval = transactionService.acceptSwapRequestApproval(transactionId);
+        transactionService.acceptSwapRequestApproval(transactionId);
         return  ResponseEntity.accepted().build();
     }
 
