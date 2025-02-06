@@ -60,9 +60,9 @@ public class TransactionController {
     }
 
     @GetMapping("/swapapproval/{transactionId}")
-    public ResponseEntity<Transaction> approveTransaction (@PathVariable String transactionId){
-        transactionService.acceptSwapRequestApproval(transactionId);
-        return  ResponseEntity.accepted().build();
+    public ResponseEntity<Transaction> acceptSwapRequest (@PathVariable String transactionId){
+        Transaction transaction = transactionService.acceptSwapRequestApproval(transactionId);
+        return  ResponseEntity.ok(transaction);
     }
 
     @GetMapping("/swapdecline/{transactionId}")

@@ -102,6 +102,10 @@ public class TransactionService {
         if (ownerPlant.getPlantStatus().equals(PlantStatus.SOLD_OR_SWAPPED)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The flower is already sold or swapped.");
         }
+        //Om det är reserverad eller utbytt kastar felmedelande
+        if (ownerPlant.getPlantStatus().equals(PlantStatus.RESERVED)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The flower is already reserveded.");
+        }
         //om de två "if" skippades och så byter jag status på owner plantan och recipient plantan och gör det från "AVAILABLE" till "RESERVED"
         ownerPlant.setPlantStatus(PlantStatus.RESERVED);
         recipientPlant.setPlantStatus(PlantStatus.RESERVED);
@@ -141,15 +145,18 @@ public class TransactionService {
         if (transaction.isOwnerAgreement()) {
             throw new RuntimeException("The transaction is already approved by owner.");
         }
-        //hittar plantan, med hjälp av id, använder metoden getPlantById från plantService samt getter
-        Plant plant = plantService.getPlantById(transaction.getOwnerPlantId());
+        //hittar plantan till recipient och plantan till owner, med hjälp av id, använder metoden getPlantById från plantService samt getter
+        Plant ownerPlant = plantService.getPlantById(transaction.getOwnerPlantId());
+        Plant recipientPlant = plantService.getPlantById(transaction.getRecipientPlantId());
         //hittar owner och recipient med hjälp av id, använder metoden getUserById från userService
         User owner = userService.getUserById(transaction.getOwnerId());
         User recipient = userService.getUserById(transaction.getRecipientId());
         //Status ska ändras från "RESERVED" till "SOLD_OR_SWAPPED"
-        plant.setPlantStatus(PlantStatus.SOLD_OR_SWAPPED);
-        //Updaterar planta
-        plantService.updatePlantById(plant.getId(), plant);
+        ownerPlant.setPlantStatus(PlantStatus.SOLD_OR_SWAPPED);
+        recipientPlant.setPlantStatus(PlantStatus.SOLD_OR_SWAPPED);
+        //Updaterar plantorna
+        plantService.updatePlantById(ownerPlant.getId(), ownerPlant);
+        plantService.updatePlantById(recipientPlant.getId(), recipientPlant);
         //Nu när jag hittat allt, ska ownerAgreement approval sättas till TRUE
         transaction.setOwnerAgreement(true);
         //Updaterar transaction
@@ -161,15 +168,18 @@ public class TransactionService {
         if (transaction.isOwnerAgreement()) {
             throw new RuntimeException("The transaction is already approved by owner.");
         }
-        //hittar plantan, med hjälp av id, använder metoden getPlantById från plantService samt getter
-        Plant plant = plantService.getPlantById(transaction.getOwnerPlantId());
+        //hittar plantan till recipient och plantan till owner, med hjälp av id, använder metoden getPlantById från plantService samt getter
+        Plant ownerPlant = plantService.getPlantById(transaction.getOwnerPlantId());
+        Plant recipientPlant = plantService.getPlantById(transaction.getRecipientPlantId());
         //hittar owner och recipient med hjälp av id, använder metoden getUserById från userService
         User owner = userService.getUserById(transaction.getOwnerId());
         User recipient = userService.getUserById(transaction.getRecipientId());
         //Status ska ändras från "RESERVED" till "AVAILABLE"
-        plant.setPlantStatus(PlantStatus.AVAILABLE);
+        ownerPlant.setPlantStatus(PlantStatus.AVAILABLE);
+        recipientPlant.setPlantStatus(PlantStatus.AVAILABLE);
         //Updaterar planta
-        plantService.updatePlantById(plant.getId(), plant);
+        plantService.updatePlantById(ownerPlant.getId(), ownerPlant);
+        plantService.updatePlantById(recipientPlant.getId(), recipientPlant);
         //tar bort transaktionen från transaction repositoriet och från owner med hjälp av metoden deleteTransaction
         deleteTransaction(transaction.getId(), owner.getId());
     }

@@ -27,7 +27,6 @@ public class Plant {
     private PlantSize plantSize;
 
     @NotNull(message = "Plant type can not be null")
-    @NotEmpty(message = "Plant type can not be null")
     private PlantType plantType;
 
     private PlantLightRequirment plantLightRequirment;
@@ -47,7 +46,6 @@ public class Plant {
     private String imageURL;
 
     @NotNull(message = "Plant status can not be null")
-    @NotEmpty(message = "Plant status can not be empty")
     private PlantStatus plantStatus;
 
 
