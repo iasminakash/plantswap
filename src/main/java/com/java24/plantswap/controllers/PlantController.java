@@ -21,6 +21,8 @@ public class PlantController {
         this.plantService = plantService;
     }
 
+    //endpoints för plant management, kallar på metoder ifrån plantService klassen
+
 
     @PostMapping("/{userId}")
     public ResponseEntity<Plant> createPlant (@RequestBody Plant plant, @Valid @PathVariable String userId) {

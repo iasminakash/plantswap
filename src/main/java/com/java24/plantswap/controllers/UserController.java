@@ -23,6 +23,7 @@ public class UserController {
 
     }
 
+//endpoints för user management, kallar på metoder ifrån userService klassen
     @PostMapping
     public ResponseEntity<User> registerNewUser(@RequestBody User user) {
         User newUser = userService.registerNewUser(user);

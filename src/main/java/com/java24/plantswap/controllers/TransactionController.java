@@ -22,6 +22,8 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
+    ////endpoints för transaction management, kallar på metoder ifrån transactionService klassen
+
     @PostMapping("/purchase")
     public ResponseEntity<Transaction> createPurchase(@Valid @RequestBody Transaction newTransaction){
         Transaction createdTransaction = transactionService.createPurchase(newTransaction);
