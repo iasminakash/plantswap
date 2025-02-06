@@ -102,10 +102,6 @@ public class TransactionService {
         if (ownerPlant.getPlantStatus().equals(PlantStatus.SOLD_OR_SWAPPED)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The flower is already sold or swapped.");
         }
-        //Om det är reserverad eller utbytt kastar felmedelande
-        if (ownerPlant.getPlantStatus().equals(PlantStatus.RESERVED)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The flower is already reserveded.");
-        }
         //om de två "if" skippades och så byter jag status på owner plantan och recipient plantan och gör det från "AVAILABLE" till "RESERVED"
         ownerPlant.setPlantStatus(PlantStatus.RESERVED);
         recipientPlant.setPlantStatus(PlantStatus.RESERVED);

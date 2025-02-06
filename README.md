@@ -116,4 +116,5 @@ Prissatta växter måste ha ett fast pris mellan 50 och 1000 kr.
 Problem: Systemet tillåter att en användare byter planta med sig själv eller köper en planta från sig själv, vilket inte är logiskt.
 Förslag på förbättring: Ha bättre kontroll och med hjälp av förändring i bussines logiken se till att ownerId och recipientId i kollektionen "transactions" inte kan vara samma värde.
 
-
+Problem: Systemet tillåter att en användare lägga pris även om plantan ska bytas ut. Dessutom kan en användare lägga "exchange preferences", info om preferenser för byte ifall plantan ska vara till salu.
+Förslag på förbättring: Ha bättre kontroll och med hjälp av förändring i bussines logiken se till att visa fälten blockedas från ifyllning i momenten när användaren bestämmer om plantan är för utbyte eller till salu.
