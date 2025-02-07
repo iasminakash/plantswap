@@ -41,7 +41,8 @@ mvn spring-boot:run
 
 
 
-#BESKRIVNING AV API METODER
+# BESKRIVNING AV API METODER
+
 Nedan följer en sammanfattning av de olika API-metoderna och deras funktioner. För exempel på responses finns följande publicering i Postman. Besök det genom att följa länken nedan.
 https://documenter.getpostman.com/view/41102705/2sAYX6ng2e
 
