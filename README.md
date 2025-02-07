@@ -1,5 +1,6 @@
 # plantswap
 INSTALLATIONSINSTRUKTIONER
+
 För att installera denna REST API behövs följande:
 -JDK 
 -IntelliJ IDEA (CE eller UE)
