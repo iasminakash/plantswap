@@ -14,9 +14,12 @@ För att installera denna REST API behövs följande:
 
 
 # FUNKTIONALITET
-Detta är ett enkelt REST API för en växtutbytesapplikation där användare kan köpa eller byta ut växter.
+Detta är ett enkelt REST API för en växtutbytesapplikation där användare kan köpa eller byta ut växter. API metoderna tillåter:
+
 -user management
+
 -listing management
+
 -transaction management
 
 
